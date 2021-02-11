@@ -20,8 +20,15 @@ void main() async {
 Future<void> initHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ImovelAdapter());
-  Hive.registerAdapter(EnderecoAdapter());
   Hive.registerAdapter(RoteirizacaoAdapter());
+  Hive.registerAdapter(EnderecoAdapter());
+  Hive.registerAdapter(ClienteAdapter());
+  Hive.registerAdapter(SubcategoriasAdapter());
+  Hive.registerAdapter(CaracteristicasAdapter());
+  Hive.registerAdapter(ConclusaoAdapter());
+  Hive.registerAdapter(HidrometroAdapter());
+  Hive.registerAdapter(CoordenadasAdapter());
+
   Hive.registerAdapter(RoteiroResumoAdapter());
   Hive.registerAdapter(UsuarioAdapter());
   Hive.registerAdapter(OAuthTokenAdapter()); 

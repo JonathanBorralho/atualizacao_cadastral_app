@@ -17,5 +17,5 @@ class OAuthTokenAdapter extends TypeAdapter<OAuthToken> {
   }
 
   @override
-  int get typeId => 7;
+  int get typeId => 50;
 }
