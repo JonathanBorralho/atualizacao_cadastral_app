@@ -1,4 +1,4 @@
-import 'package:atualizacao_cadastral_app/app/shared/home.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/roteiro_module.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -36,7 +36,7 @@ class AppModule extends MainModule {
   List<ModularRouter> get routers => [
     ModularRouter(Modular.initialRoute, child: (_, __) => SplashPage()),
     ModularRouter('/login', module: LoginModule()),
-    ModularRouter('/home', child: (_, __) => Home()),
+    ModularRouter('/roteiros', module: RoteiroModule()),
   ];
 
   @override

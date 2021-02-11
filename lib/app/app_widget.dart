@@ -36,7 +36,7 @@ class _AppWidgetState extends State<AppWidget> {
             child: child,
             listener: (context, state) {
               if (state.isAuthenticated) {
-                _navigator.pushNamedAndRemoveUntil('/home', (route) => false);
+                _navigator.pushNamedAndRemoveUntil('/roteiros', (route) => false);
               }
 
               if (!state.isAuthenticated) {

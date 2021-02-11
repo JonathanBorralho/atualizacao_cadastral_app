@@ -7,6 +7,8 @@ import 'package:login_module/login_module.dart';
 import 'package:oauth_dio/oauth_dio.dart';
 
 import 'app/app_module.dart';
+import 'app/modules/roteiro/models/imovel.dart';
+import 'app/modules/roteiro/models/roteiro_resumo.dart';
 
 void main() async {
   await initHive();
@@ -17,6 +19,14 @@ void main() async {
 
 Future<void> initHive() async {
   await Hive.initFlutter();
+  Hive.registerAdapter(ImovelAdapter());
+  Hive.registerAdapter(EnderecoAdapter());
+  Hive.registerAdapter(RoteirizacaoAdapter());
+  Hive.registerAdapter(RoteiroResumoAdapter());
+  Hive.registerAdapter(UsuarioAdapter());
   Hive.registerAdapter(OAuthTokenAdapter()); 
+
+  await Hive.openBox<Imovel>('imoveis');
+  await Hive.openBox<RoteiroResumo>('roteiros');
   await Hive.openBox<OAuthToken>('OAUTH_TOKEN_BOX');
 }
