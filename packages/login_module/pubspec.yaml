@@ -1,0 +1,17 @@
+name: login_module
+description: A flutter modular responsisable for log in a user.
+version: 1.0.0
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  hive: ^1.4.4+1
+  flutter_modular: ^2.0.1
+  dio:
+  reactive_forms: ^8.0.3
+  flutter_bloc: ^6.1.1
+  hydrated_bloc: ^6.1.0
+  equatable: ^1.2.5
+  loading_overlay:
+  oauth_dio: ^0.2.2+3
