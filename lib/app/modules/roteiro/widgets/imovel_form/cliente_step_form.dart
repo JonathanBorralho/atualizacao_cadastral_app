@@ -69,6 +69,7 @@ class ClienteStepForm extends StatelessWidget {
               DatePickerField(
                 labelText: 'Emissão',
                 formControlName: 'cliente.data_emissao',
+                initialDate: cliente.dataEmissao,
               ),
               Row(
                 children: [
@@ -97,10 +98,11 @@ class ClienteStepForm extends StatelessWidget {
                 items: sexos.map(toDropdownMenuItem).toList(),
                 oldValue: cliente?.sexo,
               ),
-              /* DatePickerField(
+              DatePickerField(
                 labelText: 'Data de Nascimento',
                 formControlName: 'cliente.data_nascimento',
-              ), */
+                initialDate: cliente.dataNascimento,
+              ),
               CustomInputField(
                 formControlName: 'cliente.nome_mae',
                 labelText: 'Nome da Mãe',

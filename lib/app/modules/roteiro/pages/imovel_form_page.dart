@@ -243,7 +243,6 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
     imovelMap['cliente']['data_emissao'] = widget.imovel.cliente.dataEmissao;
     imovelMap['cliente']['data_nascimento'] = widget.imovel.cliente.dataNascimento;
     imovelMap['hidrometro']['data_leitura'] = widget.imovel.hidrometro.dataLeitura;
-    print(widget.imovel.hidrometro.dataLeitura);
     _form.patchValue(imovelMap);
   }
 

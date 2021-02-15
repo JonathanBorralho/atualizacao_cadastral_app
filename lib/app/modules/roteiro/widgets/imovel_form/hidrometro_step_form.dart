@@ -40,6 +40,7 @@ class HidrometroStepForm extends StatelessWidget {
               DatePickerField(
                 labelText: 'Data de Leitura',
                 formControlName: 'hidrometro.data_leitura',
+                initialDate: hidrometro.dataLeitura,
               ),
             ],
           );

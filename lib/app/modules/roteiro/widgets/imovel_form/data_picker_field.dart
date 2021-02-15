@@ -30,7 +30,7 @@ class DatePickerField extends StatelessWidget {
             showDatePicker(
               context: context,
               initialDate: initialDate ?? DateTime.now(),
-              firstDate: firstDate ?? DateTime(1930, 1, 1),
+              firstDate: firstDate ?? DateTime(1910, 1, 1),
               lastDate: initialDate ?? DateTime.now(),
             ).then((value) {
               formControl.value = value ?? formControl.value;
