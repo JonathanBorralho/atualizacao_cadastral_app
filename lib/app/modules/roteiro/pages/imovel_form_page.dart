@@ -119,10 +119,10 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
         'leitura': FormControl<int>(),
         'data_leitura': FormControl<DateTime>(),
       }),
-      /* 'coordenadas': _fb.group({
+      'coordenadas': _fb.group({
         'latitude': FormControl<double>(),
         'longitude': FormControl<double>(),
-      }), */
+      }),
       'observacao': FormControl<String>(),
     });
 
@@ -130,6 +130,7 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
     imovelMap['cliente']['data_emissao'] = widget.imovel.cliente.dataEmissao;
     imovelMap['cliente']['data_nascimento'] = widget.imovel.cliente.dataNascimento;
     imovelMap['hidrometro']['data_leitura'] = widget.imovel.hidrometro.dataLeitura;
+    imovelMap['coordenadas'] = imovelMap['coordenadas'] ?? Coordenadas().toJson();
     _form.patchValue(imovelMap);
   }
 
