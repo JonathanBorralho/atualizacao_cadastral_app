@@ -193,10 +193,10 @@ class ClienteAdapter extends TypeAdapter<Cliente> {
       email: fields[5] as String,
       sexo: fields[6] as String,
       orgExp: fields[7] as String,
-      dataEmissao: fields[8] as String,
+      dataEmissao: fields[8] as DateTime,
       tipoCliente: fields[9] as String,
       tipoPessoa: fields[10] as String,
-      dataNascimento: fields[11] as String,
+      dataNascimento: fields[11] as DateTime,
       nomeMae: fields[12] as String,
       telDdd: fields[13] as String,
       telNum: fields[14] as String,
@@ -398,7 +398,7 @@ class HidrometroAdapter extends TypeAdapter<Hidrometro> {
     return Hidrometro(
       hidrometro: fields[0] as String,
       leitura: fields[1] as int,
-      dataLeitura: fields[2] as String,
+      dataLeitura: fields[2] as DateTime,
     );
   }
 

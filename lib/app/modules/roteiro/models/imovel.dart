@@ -260,7 +260,7 @@ class Cliente {
   final String orgExp;
 
   @HiveField(8)
-  final String dataEmissao;
+  final DateTime dataEmissao;
 
   @HiveField(9)
   final String tipoCliente;
@@ -269,7 +269,7 @@ class Cliente {
   final String tipoPessoa;
 
   @HiveField(11)
-  final String dataNascimento;
+  final DateTime dataNascimento;
 
   @HiveField(12)
   final String nomeMae;
@@ -289,10 +289,10 @@ class Cliente {
     email: json['email'] == null ? null : json['email'],
     sexo: json['sexo'] == null ? null : json['sexo'],
     orgExp: json['org_exp'] == null ? null : json['org_exp'],
-    dataEmissao: json['data_emissao'] == null ? null : json['data_emissao'],
+    dataEmissao: json['data_emissao'] == null ? null : DateTime.parse(json['data_emissao']),
     tipoCliente: json['tipo_cliente'] == null ? null : json['tipo_cliente'],
     tipoPessoa: json['tipo_pessoa'] == null ? null : json['tipo_pessoa'],
-    dataNascimento: json['data_nascimento'] == null ? null : json['data_nascimento'],
+    dataNascimento: json['data_nascimento'] == null ? null : DateTime.parse(json['data_nascimento']),
     nomeMae: json['nome_mae'] == null ? null : json['nome_mae'],
     telDdd: json['tel_ddd'] == null ? null : json['tel_ddd'],
     telNum: json['tel_num'] == null ? null : json['tel_num'],
@@ -307,10 +307,10 @@ class Cliente {
     'email': email == null ? null : email,
     'sexo': sexo == null ? null : sexo,
     'org_exp': orgExp == null ? null : orgExp,
-    'data_emissao': dataEmissao == null ? null : dataEmissao,
+    'data_emissao': dataEmissao == null ? null : '${dataEmissao.year.toString().padLeft(4, '0')}-${dataEmissao.month.toString().padLeft(2, '0')}-${dataEmissao.day.toString().padLeft(2, '0')}',
     'tipo_cliente': tipoCliente == null ? null : tipoCliente,
     'tipo_pessoa': tipoPessoa == null ? null : tipoPessoa,
-    'data_nascimento': dataNascimento == null ? null : dataNascimento,
+    'data_nascimento': dataNascimento == null ? null : '${dataNascimento.year.toString().padLeft(4, '0')}-${dataNascimento.month.toString().padLeft(2, '0')}-${dataNascimento.day.toString().padLeft(2, '0')}',
     'nome_mae': nomeMae == null ? null : nomeMae,
     'tel_ddd': telDdd == null ? null : telDdd,
     'tel_num': telNum == null ? null : telNum,
@@ -452,18 +452,18 @@ class Hidrometro {
   final int leitura;
 
   @HiveField(2)
-  final String dataLeitura;
+  final DateTime dataLeitura;
 
   factory Hidrometro.fromJson(Map<String, dynamic> json) => Hidrometro(
     hidrometro: json['hidrometro'] == null ? null : json['hidrometro'],
     leitura: json['leitura'] == null ? null : json['leitura'],
-    dataLeitura: json['data_leitura'] == null ? null : json['data_leitura'],
+    dataLeitura: json['data_leitura'] == null ? null : DateTime.parse(json['data_leitura']),
   );
 
   Map<String, dynamic> toJson() => {
     'hidrometro': hidrometro == null ? null : hidrometro,
     'leitura': leitura == null ? null : leitura,
-    'data_leitura': dataLeitura == null ? null : dataLeitura,
+    'data_leitura': dataLeitura == null ? null : '${dataLeitura.year.toString().padLeft(4, '0')}-${dataLeitura.month.toString().padLeft(2, '0')}-${dataLeitura.day.toString().padLeft(2, '0')}',
   };
 }
 
