@@ -196,10 +196,10 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
         'email': null,
         'sexo': null,
         'org_exp': null,
-        'data_emissao': FormControl<String>(),
+        'data_emissao': FormControl<DateTime>(),
         'tipo_cliente': null,
         'tipo_pessoa': null,
-        'data_nascimento': FormControl<String>(),
+        'data_nascimento': FormControl<DateTime>(),
         'nome_mae': null,
         'tel_ddd': null,
         'tel_num': null,
@@ -230,7 +230,7 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
         'trocar': FormControl<bool>(value: false),
         'hidrometro': FormControl<String>(),
         'leitura': FormControl<int>(),
-        'data_leitura': FormControl<String>(),
+        'data_leitura': FormControl<DateTime>(),
       }),
       /* 'coordenadas': _fb.group({
         'latitude': FormControl<double>(),
@@ -239,7 +239,12 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
       'observacao': FormControl<String>(),
     });
 
-    _form.patchValue(widget.imovel.toJson());
+    var imovelMap = widget.imovel.toJson();
+    imovelMap['cliente']['data_emissao'] = widget.imovel.cliente.dataEmissao;
+    imovelMap['cliente']['data_nascimento'] = widget.imovel.cliente.dataNascimento;
+    imovelMap['hidrometro']['data_leitura'] = widget.imovel.hidrometro.dataLeitura;
+    print(widget.imovel.hidrometro.dataLeitura);
+    _form.patchValue(imovelMap);
   }
 
   @override

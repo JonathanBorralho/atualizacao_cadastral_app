@@ -6,6 +6,7 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:atualizacao_cadastral_app/app/shared/widgets/custom_input_field.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/imovel.dart';
 
+import 'data_picker_field.dart';
 import 'dropdown_input_field.dart';
 
 class ClienteStepForm extends StatelessWidget {
@@ -65,10 +66,10 @@ class ClienteStepForm extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 oldValue: cliente?.rg,
               ),
-              /* DatePickerField(
+              DatePickerField(
                 labelText: 'Emissão',
                 formControlName: 'cliente.data_emissao',
-              ), */
+              ),
               Row(
                 children: [
                   Expanded(

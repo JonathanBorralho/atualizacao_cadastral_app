@@ -51,10 +51,10 @@ class DatePickerField extends StatelessWidget {
                 if (date != null) ...{
                   Text(
                     DateFormat('dd/MM/yyyy').format(date),
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 },
-                Icon(Icons.arrow_drop_down),
+                const Icon(Icons.arrow_drop_down),
               ],
             ),
           ),

@@ -37,10 +37,10 @@ class HidrometroStepForm extends StatelessWidget {
                 oldValue: hidrometro?.leitura,
                 textInputAction: TextInputAction.done,
               ),
-              /* DatePickerField(
+              DatePickerField(
                 labelText: 'Data de Leitura',
                 formControlName: 'hidrometro.data_leitura',
-              ), */
+              ),
             ],
           );
         },
