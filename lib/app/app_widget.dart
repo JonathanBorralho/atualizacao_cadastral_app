@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:login_module/login_module.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 class AppWidget extends StatefulWidget {
   @override
   _AppWidgetState createState() => _AppWidgetState();
@@ -31,12 +33,21 @@ class _AppWidgetState extends State<AppWidget> {
         onGenerateRoute: Modular.generateRoute,
         navigatorKey: Modular.navigatorKey,
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('pt', 'BR'),
+        ],
         builder: (context, child) {
           return BlocListener<AuthenticationBloc, AuthenticationState>(
             child: child,
             listener: (context, state) {
               if (state.isAuthenticated) {
-                _navigator.pushNamedAndRemoveUntil('/roteiros', (route) => false);
+                _navigator.pushNamedAndRemoveUntil(
+                    '/roteiros', (route) => false);
               }
 
               if (!state.isAuthenticated) {
