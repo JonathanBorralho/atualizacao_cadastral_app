@@ -1,3 +1,5 @@
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/coordenadas_step_form.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/gerar_coordenadas_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -128,9 +130,12 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
 
     var imovelMap = widget.imovel.toJson();
     imovelMap['cliente']['data_emissao'] = widget.imovel.cliente.dataEmissao;
-    imovelMap['cliente']['data_nascimento'] = widget.imovel.cliente.dataNascimento;
-    imovelMap['hidrometro']['data_leitura'] = widget.imovel.hidrometro.dataLeitura;
-    imovelMap['coordenadas'] = imovelMap['coordenadas'] ?? Coordenadas().toJson();
+    imovelMap['cliente']['data_nascimento'] =
+        widget.imovel.cliente.dataNascimento;
+    imovelMap['hidrometro']['data_leitura'] =
+        widget.imovel.hidrometro.dataLeitura;
+    imovelMap['coordenadas'] =
+        imovelMap['coordenadas'] ?? Coordenadas().toJson();
     _form.patchValue(imovelMap);
   }
 
@@ -186,7 +191,7 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
             Step(
               title: const Text('Coordenadas'),
               state: StepState.indexed,
-              content: Center(child: const Text('Coordenadas')),
+              content: const CoordenadasStepForm(),
               isActive: state.currentStep == 7,
             ),
             Step(
@@ -233,6 +238,9 @@ class StepperControls extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8),
           child: Row(
             children: [
+              if (state.currentStep == 7) ...{
+                const GerarCoordenadasButton(),
+              },
               if (!state.isLast) ...{
                 TextButton(
                   onPressed: onStepContinue,
@@ -244,7 +252,7 @@ class StepperControls extends StatelessWidget {
                   onPressed: onStepCancel,
                   child: const Text('ANTERIOR'),
                 ),
-              }
+              },
             ],
           ),
         );
