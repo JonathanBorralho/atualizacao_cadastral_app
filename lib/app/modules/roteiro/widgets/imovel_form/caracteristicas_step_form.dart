@@ -1,3 +1,4 @@
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/dropdowns_config.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/imovel.dart';
 import 'package:atualizacao_cadastral_app/app/shared/widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class CaracteristicasStepForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Caracteristicas caracteristicas = context.read<Imovel>().caracteristicas;
-    //final DropdownsConfig config = Provider.of<DropdownsConfig>(context);
+    final DropdownsConfig config = context.read<DropdownsConfig>();
     return FocusScope(
       child: Builder(
         builder: (context) {
@@ -23,7 +24,7 @@ class CaracteristicasStepForm extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 oldValue: caracteristicas?.area,
               ),
-              /* DropdownInputField(
+              DropdownInputField(
                 labelText: 'Calçada',
                 formControlName: 'caracteristicas.calcada',
                 items: config.tipoCalcada.map(tipoToDropdownMenuItem).toList(),
@@ -76,7 +77,7 @@ class CaracteristicasStepForm extends StatelessWidget {
                 formControlName: 'caracteristicas.cobertura',
                 items: config.tipoCobertura.map(tipoToDropdownMenuItem).toList(),
                 oldValue: caracteristicas?.cobertura,
-              ), */
+              ),
             ],
           );
         },
@@ -91,12 +92,12 @@ class CaracteristicasStepForm extends StatelessWidget {
     );
   }
 
-  /* DropdownMenuItem<String> tipoToDropdownMenuItem(Tipo value) {
+  DropdownMenuItem<String> tipoToDropdownMenuItem(Tipo value) {
     final String id = '${value.id}';
     final String text = '${id.padLeft(2, '0')} - ${value.descricao}';
     return DropdownMenuItem<String>(
       child: Text(text),
       value: text,
     );
-  } */
+  }
 }

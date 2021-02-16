@@ -1,3 +1,4 @@
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/dropdowns_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -6,6 +7,7 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:atualizacao_cadastral_app/app/shared/widgets/custom_input_field.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/imovel.dart';
 
+import 'cliente_search_field.dart';
 import 'data_picker_field.dart';
 import 'dropdown_input_field.dart';
 
@@ -18,7 +20,7 @@ class ClienteStepForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final FormGroup form = ReactiveForm.of(context);
     final Cliente cliente = context.read<Imovel>().cliente;
-    //final DropdownsConfig config = Provider.of<DropdownsConfig>(context);
+    final DropdownsConfig config = context.read<DropdownsConfig>();
     return FocusScope(
       child: Builder(
         builder: (context) {
@@ -48,7 +50,7 @@ class ClienteStepForm extends StatelessWidget {
                 items: tiposPessoa.map(toDropdownMenuItem).toList(),
                 oldValue: cliente?.tipoPessoa,
               ),
-              //ClienteSearchField(),
+              ClienteSearchField(),
               CustomInputField(
                 formControlName: 'cliente.cpf',
                 labelText: 'CPF',
@@ -82,14 +84,14 @@ class ClienteStepForm extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10),
-                  /* Expanded(
+                  Expanded(
                     child: DropdownInputField(
                       labelText: 'Estado',
-                      formControlName: 'cliente.estado',
+                      formControlName: 'cliente.uf',
                       items: config.estados.map(estadosToDropdownMenuItem).toList(),
-                      oldValue: cliente?.estado,
+                      oldValue: cliente?.uf,
                     ),
-                  ), */
+                  ),
                 ],
               ),
               DropdownInputField(
@@ -160,10 +162,10 @@ class ClienteStepForm extends StatelessWidget {
     );
   }
 
- /*  DropdownMenuItem<String> estadosToDropdownMenuItem(Estado estado) {
+  DropdownMenuItem<String> estadosToDropdownMenuItem(Estado estado) {
     return DropdownMenuItem<String>(
       child: Text(estado.sigla),
       value: estado.sigla,
     );
-  } */
+  }
 }

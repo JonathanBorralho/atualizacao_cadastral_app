@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart' hide Consumer;
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/dropdowns_config.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/services/dropdowns_config_service.dart';
 
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/imovel.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/state/stepper_controller.dart';
@@ -62,7 +66,7 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
         'sexo': null,
         'org_exp': null,
         'data_emissao': FormControl<DateTime>(),
-        'tipo_cliente': null,
+        'tipo_cliente': FormControl<String>(),
         'tipo_pessoa': null,
         'data_nascimento': FormControl<DateTime>(),
         'nome_mae': null,
@@ -127,7 +131,21 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
         ],
         child: ReactiveForm(
           formGroup: _form,
-          child: const ImovelFormGroup(),
+          child: FutureBuilder<DropdownsConfig>(
+            future: Modular.get<DropdownsConfigService>().getConfig(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Provider.value(
+                  value: snapshot.data,
+                  child: const ImovelFormGroup(),
+                );
+              }
+
+              return const Center(
+                child: const CircularProgressIndicator(),
+              );
+            },
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
