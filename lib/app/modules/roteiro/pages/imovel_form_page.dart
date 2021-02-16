@@ -1,5 +1,3 @@
-import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/coordenadas_step_form.dart';
-import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/gerar_coordenadas_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -13,41 +11,19 @@ import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_for
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/caracteristicas_step_form.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/hidrometro_step_form.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/conclusao_step_form.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/coordenadas_step_form.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/gerar_coordenadas_button.dart';
 
-class ImovelFormPage extends StatelessWidget {
+class ImovelFormPage extends StatefulWidget {
   final Imovel imovel;
 
   ImovelFormPage(this.imovel);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${imovel.roteirizacao.matricula}'),
-      ),
-      body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => StepperController(length: 9),
-          ),
-          Provider.value(value: this.imovel),
-        ],
-        child: ImovelFormGroup(imovel),
-      ),
-    );
-  }
+  _ImovelFormPageState createState() => _ImovelFormPageState();
 }
 
-class ImovelFormGroup extends StatefulWidget {
-  final Imovel imovel;
-
-  const ImovelFormGroup(this.imovel);
-
-  @override
-  _ImovelFormGroupState createState() => _ImovelFormGroupState();
-}
-
-class _ImovelFormGroupState extends State<ImovelFormGroup> {
+class _ImovelFormPageState extends State<ImovelFormPage> {
   FormGroup _form;
   FormBuilder _fb = FormBuilder();
 
@@ -130,91 +106,116 @@ class _ImovelFormGroupState extends State<ImovelFormGroup> {
 
     var imovelMap = widget.imovel.toJson();
     imovelMap['cliente']['data_emissao'] = widget.imovel.cliente.dataEmissao;
-    imovelMap['cliente']['data_nascimento'] =
-        widget.imovel.cliente.dataNascimento;
-    imovelMap['hidrometro']['data_leitura'] =
-        widget.imovel.hidrometro.dataLeitura;
-    imovelMap['coordenadas'] =
-        imovelMap['coordenadas'] ?? Coordenadas().toJson();
+    imovelMap['cliente']['data_nascimento'] = widget.imovel.cliente.dataNascimento;
+    imovelMap['hidrometro']['data_leitura'] = widget.imovel.hidrometro.dataLeitura;
+    imovelMap['coordenadas'] = imovelMap['coordenadas'] ?? Coordenadas().toJson();
     _form.patchValue(imovelMap);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveForm(
-      formGroup: _form,
-      child: Consumer<StepperController>(
-        builder: (context, state, child) => Stepper(
-          steps: [
-            Step(
-              title: const Text('Roteirização'),
-              state: StepState.indexed,
-              content: const RoteirizacaoStepForm(),
-              isActive: state.currentStep == 0,
-            ),
-            Step(
-              title: const Text('Endereço'),
-              state: StepState.indexed,
-              content: const EnderecoStepForm(),
-              isActive: state.currentStep == 1,
-            ),
-            Step(
-              title: const Text('Cliente'),
-              state: StepState.indexed,
-              content: const ClienteStepForm(),
-              isActive: state.currentStep == 2,
-            ),
-            Step(
-              title: const Text('Subcategoria/Econimias'),
-              state: StepState.indexed,
-              content: const SubcategoriaEconomiasStepForm(),
-              isActive: state.currentStep == 3,
-            ),
-            Step(
-              title: const Text('Características'),
-              state: StepState.indexed,
-              content: const CaracteristicasStepForm(),
-              isActive: state.currentStep == 4,
-            ),
-            Step(
-              title: const Text('Conclusão'),
-              state: StepState.indexed,
-              content: const ConclusaoStepForm(),
-              isActive: state.currentStep == 5,
-            ),
-            Step(
-              title: const Text('Hidrômetro'),
-              state: StepState.indexed,
-              content: const HidrometroStepForm(),
-              isActive: state.currentStep == 6,
-            ),
-            Step(
-              title: const Text('Coordenadas'),
-              state: StepState.indexed,
-              content: const CoordenadasStepForm(),
-              isActive: state.currentStep == 7,
-            ),
-            Step(
-              title: const Text('Observação'),
-              state: StepState.indexed,
-              content: ReactiveTextField(
-                formControlName: 'observacao',
-                textInputAction: TextInputAction.done,
-              ),
-              isActive: state.currentStep == 8,
-            ),
-          ],
-          currentStep: state.currentStep,
-          onStepContinue: state.onStepContinue,
-          onStepCancel: state.onStepCancel,
-          onStepTapped: state.onStepTapped,
-          controlsBuilder: (context, {onStepCancel, onStepContinue}) {
-            return StepperControls(
-              onStepCancel: onStepCancel,
-              onStepContinue: onStepContinue,
-            );
-          },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${widget.imovel.roteirizacao.matricula}'),
+      ),
+      body: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => StepperController(length: 9),
+          ),
+          Provider.value(value: this.widget.imovel),
+        ],
+        child: ReactiveForm(
+          formGroup: _form,
+          child: const ImovelFormGroup(),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.save),
+        onPressed: () {
+          print(_form.value);
+        },
+      ),
+    );
+  }
+}
+
+class ImovelFormGroup extends StatelessWidget {
+  const ImovelFormGroup();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<StepperController>(
+      builder: (context, state, child) => Stepper(
+        steps: [
+          Step(
+            title: const Text('Roteirização'),
+            state: StepState.indexed,
+            content: const RoteirizacaoStepForm(),
+            isActive: state.currentStep == 0,
+          ),
+          Step(
+            title: const Text('Endereço'),
+            state: StepState.indexed,
+            content: const EnderecoStepForm(),
+            isActive: state.currentStep == 1,
+          ),
+          Step(
+            title: const Text('Cliente'),
+            state: StepState.indexed,
+            content: const ClienteStepForm(),
+            isActive: state.currentStep == 2,
+          ),
+          Step(
+            title: const Text('Subcategoria/Econimias'),
+            state: StepState.indexed,
+            content: const SubcategoriaEconomiasStepForm(),
+            isActive: state.currentStep == 3,
+          ),
+          Step(
+            title: const Text('Características'),
+            state: StepState.indexed,
+            content: const CaracteristicasStepForm(),
+            isActive: state.currentStep == 4,
+          ),
+          Step(
+            title: const Text('Conclusão'),
+            state: StepState.indexed,
+            content: const ConclusaoStepForm(),
+            isActive: state.currentStep == 5,
+          ),
+          Step(
+            title: const Text('Hidrômetro'),
+            state: StepState.indexed,
+            content: const HidrometroStepForm(),
+            isActive: state.currentStep == 6,
+          ),
+          Step(
+            title: const Text('Coordenadas'),
+            state: StepState.indexed,
+            content: const CoordenadasStepForm(),
+            isActive: state.currentStep == 7,
+          ),
+          Step(
+            title: const Text('Observação'),
+            state: StepState.indexed,
+            content: ReactiveTextField(
+              formControlName: 'observacao',
+              textInputAction: TextInputAction.done,
+            ),
+            isActive: state.currentStep == 8,
+          ),
+        ],
+        currentStep: state.currentStep,
+        onStepContinue: state.onStepContinue,
+        onStepCancel: state.onStepCancel,
+        onStepTapped: state.onStepTapped,
+        controlsBuilder: (context, {onStepCancel, onStepContinue}) {
+          return StepperControls(
+            onStepCancel: onStepCancel,
+            onStepContinue: onStepContinue,
+          );
+        },
       ),
     );
   }
