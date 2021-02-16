@@ -421,14 +421,14 @@ class Coordenadas {
   });
 
   @HiveField(0)
-  final String longitude;
+  final double longitude;
 
   @HiveField(1)
-  final String latitude;
+  final double latitude;
 
   factory Coordenadas.fromJson(Map<String, dynamic> json) => Coordenadas(
-    longitude: json['longitude'] == null ? null : json['longitude'],
-    latitude: json['latitude'] == null ? null : json['latitude'],
+    longitude: json["longitude"] == null ? null : json["longitude"].toDouble(),
+    latitude: json["latitude"] == null ? null : json["latitude"].toDouble(),
   );
 
   Map<String, dynamic> toJson() => {

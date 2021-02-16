@@ -359,8 +359,8 @@ class CoordenadasAdapter extends TypeAdapter<Coordenadas> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Coordenadas(
-      longitude: fields[0] as String,
-      latitude: fields[1] as String,
+      longitude: fields[0] as double,
+      latitude: fields[1] as double,
     );
   }
 

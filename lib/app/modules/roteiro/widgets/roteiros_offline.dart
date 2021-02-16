@@ -24,7 +24,7 @@ class RoteirosOffline extends StatelessWidget {
             return ListTile(
               title: Text(roteiro.usuario.nome),
               onTap: () {
-                Modular.link.pushNamed('/${roteiro.id}/imoveis');
+                Modular.to.pushNamed('/roteiros/${roteiro.id}/imoveis');
               },
             );
           },
