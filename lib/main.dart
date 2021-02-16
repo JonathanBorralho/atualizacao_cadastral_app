@@ -1,3 +1,4 @@
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/dropdowns_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hive/hive.dart';
@@ -33,7 +34,12 @@ Future<void> initHive() async {
   Hive.registerAdapter(UsuarioAdapter());
   Hive.registerAdapter(OAuthTokenAdapter()); 
 
+  Hive.registerAdapter(TipoAdapter());
+  Hive.registerAdapter(EstadoAdapter());
+  Hive.registerAdapter(DropdownsConfigAdapter());
+
   await Hive.openBox<Imovel>('imoveis');
   await Hive.openBox<RoteiroResumo>('roteiros');
+  await Hive.openBox<DropdownsConfig>('dropdown_config');
   await Hive.openBox<OAuthToken>('OAUTH_TOKEN_BOX');
 }

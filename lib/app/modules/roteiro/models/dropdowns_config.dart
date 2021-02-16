@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'dropdowns_config.g.dart';
+
+@HiveType(typeId: 20, adapterName: 'DropdownsConfigAdapter')
 class DropdownsConfig extends Equatable {
   const DropdownsConfig({
     this.tipoAbastecimento,
@@ -15,16 +19,37 @@ class DropdownsConfig extends Equatable {
     this.estados,
   });
 
+  @HiveField(0)
   final List<Tipo> tipoAbastecimento;
+
+  @HiveField(1)
   final List<Tipo> tipoSitAgua;
+
+  @HiveField(2)
   final List<Tipo> tipoSitEsgoto;
+
+  @HiveField(3)
   final List<Tipo> tipoCliente;
+
+  @HiveField(4)
   final List<Tipo> tipoCobertura;
+
+  @HiveField(5)
   final List<Tipo> tipoConstrucao;
+
+  @HiveField(6)
   final List<Tipo> tipoHabitacao;
+
+  @HiveField(7)
   final List<Tipo> tipoCalcada;
+
+  @HiveField(8)
   final List<Tipo> tipoRua;
+
+  @HiveField(9)
   final List<Tipo> tipoPropriedade;
+
+  @HiveField(10)
   final List<Estado> estados;
 
   factory DropdownsConfig.fromJson(Map<String, dynamic> json) => DropdownsConfig(
@@ -71,6 +96,7 @@ class DropdownsConfig extends Equatable {
   ];
 }
 
+@HiveType(typeId: 21, adapterName: 'EstadoAdapter')
 class Estado extends Equatable {
   const Estado({
     this.id,
@@ -78,8 +104,13 @@ class Estado extends Equatable {
     this.descricao,
   });
 
+  @HiveField(0)
   final int id;
+
+  @HiveField(1)
   final String sigla;
+
+  @HiveField(2)
   final String descricao;
 
   factory Estado.fromJson(Map<String, dynamic> json) => Estado(
@@ -102,13 +133,17 @@ class Estado extends Equatable {
   ];
 }
 
+@HiveType(typeId: 22, adapterName: 'TipoAdapter')
 class Tipo extends Equatable {
   const Tipo({
     this.id,
     this.descricao,
   });
 
+  @HiveField(0)
   final int id;
+
+  @HiveField(1)
   final String descricao;
 
   factory Tipo.fromJson(Map<String, dynamic> json) => Tipo(
