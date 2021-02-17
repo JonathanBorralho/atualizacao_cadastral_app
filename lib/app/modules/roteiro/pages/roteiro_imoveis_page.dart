@@ -50,7 +50,7 @@ class ImovelListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
           Modular.link.pushNamed('/imovel-form', arguments: imovel);

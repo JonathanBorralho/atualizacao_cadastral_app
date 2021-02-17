@@ -47,7 +47,7 @@ class CustomInputField extends StatelessWidget {
   TextStyle _labelStyle(FormControl formControl, dynamic original) {
     if (!formControl.dirty) return null;
     return original != formControl.value
-        ? TextStyle(color: Colors.orange)
+        ? const TextStyle(color: Colors.orange)
         : null;
   }
 }
