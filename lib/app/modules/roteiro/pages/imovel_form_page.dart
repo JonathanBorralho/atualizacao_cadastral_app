@@ -151,14 +151,34 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.save),
-        onPressed: () async {
-          var imoveis = Hive.box<Imovel>('imoveis');
-          Imovel imovel = Imovel.fromJson(_form.value);
-          imoveis.put(widget.imovel.key, imovel);
-        },
-      ),
+      floatingActionButton: ImovelSaveButton(form: _form, widget: widget),
+    );
+  }
+}
+
+class ImovelSaveButton extends StatelessWidget {
+  const ImovelSaveButton({
+    Key key,
+    @required FormGroup form,
+    @required this.widget,
+  }) : _form = form, super(key: key);
+
+  final FormGroup _form;
+  final ImovelFormPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      child: const Icon(Icons.save),
+      onPressed: () async {
+        var imoveis = Hive.box<Imovel>('imoveis');
+        Imovel imovel = Imovel.fromJson(_form.value);
+        imoveis.put(widget.imovel.key, imovel);
+
+        Scaffold.of(context).showSnackBar(
+          SnackBar(content: const Text('Imóvel salvo com sucesso')),
+        );
+      },
     );
   }
 }
