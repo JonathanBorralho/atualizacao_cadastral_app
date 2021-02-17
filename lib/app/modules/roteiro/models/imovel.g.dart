@@ -402,19 +402,22 @@ class HidrometroAdapter extends TypeAdapter<Hidrometro> {
       hidrometro: fields[0] as String,
       leitura: fields[1] as int,
       dataLeitura: fields[2] as DateTime,
+      trocarHidrometro: fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Hidrometro obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.hidrometro)
       ..writeByte(1)
       ..write(obj.leitura)
       ..writeByte(2)
-      ..write(obj.dataLeitura);
+      ..write(obj.dataLeitura)
+      ..writeByte(3)
+      ..write(obj.trocarHidrometro);
   }
 
   @override

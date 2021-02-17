@@ -476,6 +476,7 @@ class Hidrometro {
     this.hidrometro,
     this.leitura,
     this.dataLeitura,
+    this.trocarHidrometro = false,
   });
 
   @HiveField(0)
@@ -487,16 +488,21 @@ class Hidrometro {
   @HiveField(2)
   final DateTime dataLeitura;
 
+  @HiveField(3)
+  final bool trocarHidrometro;
+
   factory Hidrometro.fromJson(Map<String, dynamic> json) => Hidrometro(
     hidrometro: json['hidrometro'] == null ? null : json['hidrometro'],
     leitura: json['leitura'] == null ? null : json['leitura'],
     dataLeitura: json['data_leitura'] == null ? null : DateUtil.parse(json['data_leitura']),
+    trocarHidrometro: json['trocar'] == null ? null : json['trocar'],
   );
 
   Map<String, dynamic> toJson() => {
     'hidrometro': hidrometro == null ? null : hidrometro,
     'leitura': leitura == null ? null : leitura,
     'data_leitura': dataLeitura == null ? null : '${dataLeitura.year.toString().padLeft(4, '0')}-${dataLeitura.month.toString().padLeft(2, '0')}-${dataLeitura.day.toString().padLeft(2, '0')}',
+    'trocar': trocarHidrometro == null ? null : trocarHidrometro,
   };
 }
 
