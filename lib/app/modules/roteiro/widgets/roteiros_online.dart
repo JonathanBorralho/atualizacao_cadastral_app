@@ -1,9 +1,11 @@
-import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/imovel.dart';
-import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/roteiro_resumo.dart';
-import 'package:atualizacao_cadastral_app/app/modules/roteiro/repository/roteiro_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hive/hive.dart';
+
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/imovel.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/roteiro_resumo.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/repository/roteiro_repository.dart';
+import 'package:atualizacao_cadastral_app/app/shared/widgets/loading_indicator.dart';
 
 class RoteirosOnline extends StatelessWidget {
   const RoteirosOnline();
@@ -46,9 +48,7 @@ class RoteirosOnline extends StatelessWidget {
           );
         }
 
-        return Center(
-          child: CircularProgressIndicator(),
-        );
+        return const LoadingIndicator();
       },
     );
   }

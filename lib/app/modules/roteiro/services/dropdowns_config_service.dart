@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
+//import 'package:dio_http_cache/dio_http_cache.dart';
 
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/dropdowns_config.dart';
 import 'package:hive/hive.dart';

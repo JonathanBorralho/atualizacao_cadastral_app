@@ -17,6 +17,7 @@ import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_for
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/conclusao_step_form.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/coordenadas_step_form.dart';
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/gerar_coordenadas_button.dart';
+import 'package:atualizacao_cadastral_app/app/shared/widgets/loading_indicator.dart';
 
 class ImovelFormPage extends StatefulWidget {
   final Imovel imovel;
@@ -141,15 +142,13 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
                 );
               }
 
-              return const Center(
-                child: const CircularProgressIndicator(),
-              );
+              return const LoadingIndicator();
             },
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.save),
+        child: const Icon(Icons.save),
         onPressed: () {
           print(_form.value);
         },
