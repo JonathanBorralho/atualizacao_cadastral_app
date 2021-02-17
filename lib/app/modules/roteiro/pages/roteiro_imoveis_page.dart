@@ -19,17 +19,13 @@ class RoteiroImoveisPage extends StatelessWidget {
         valueListenable: Hive.box<Imovel>('imoveis').listenable(),
         builder: (context, box, child) {
           var id = int.parse(roteiroId);
-          var imoveis = box.values
-          .where((e) => e.roteiroId == id)
-          .toList()..sort(
-            (a, b) => a.id.compareTo(b.id)
-          );
+          var imoveis = box.values.where((e) => e.roteiroId == id).toList()
+            ..sort((a, b) => a.id.compareTo(b.id));
 
           if (imoveis.isEmpty) {
-            return Center(
-              child: Text('Não há imóveis'),
-            );
+            return child;
           }
+
           return ListView.builder(
             itemCount: imoveis.length,
             itemBuilder: (context, index) {
@@ -38,6 +34,9 @@ class RoteiroImoveisPage extends StatelessWidget {
             },
           );
         },
+        child: const Center(
+          child: const Text('Não há imóveis'),
+        ),
       ),
     );
   }
