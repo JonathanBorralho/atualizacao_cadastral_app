@@ -32,15 +32,18 @@ class RoteirosOnline extends StatelessWidget {
                   icon: Icon(saved ? Icons.file_download_done : Icons.file_download),
                   onPressed: !saved ? () async {
                     var imoveisBox = Hive.box<Imovel>('imoveis');
-                    var roteirosBox = Hive.box<RoteiroResumo>('roteiros');
 
                     roteirosBox.put(roteiro.id, roteiro);
                     var imoveisList = await Modular.get<RoteiroRepository>()
                         .findAllByRoteiro(roteiro.id);
 
-                    imoveisBox.addAll(imoveisList
+                    var imoveisListRoteiro = imoveisList
                         .map((e) => e.copyWith(roteiroId: roteiro.id))
-                        .toList());
+                        .toList();
+
+                    var result = { for (var imovel in imoveisListRoteiro) imovel.id: imovel };
+
+                    imoveisBox.putAll(result);
                   } : null,
                 ),
               );

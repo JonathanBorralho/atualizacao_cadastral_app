@@ -1,6 +1,7 @@
 import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/dropdown_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart' hide Consumer;
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -38,6 +39,7 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
     super.initState();
 
     _form = _fb.group({
+      'key': widget.imovel.key,
       'id': null,
       'roteiro_id': null,
       'impedimento': null,
@@ -151,8 +153,10 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
-        onPressed: () {
-          print(_form.value);
+        onPressed: () async {
+          var imoveis = Hive.box<Imovel>('imoveis');
+          Imovel imovel = Imovel.fromJson(_form.value);
+          imoveis.put(widget.imovel.key, imovel);
         },
       ),
     );

@@ -19,7 +19,11 @@ class RoteiroImoveisPage extends StatelessWidget {
         valueListenable: Hive.box<Imovel>('imoveis').listenable(),
         builder: (context, box, child) {
           var id = int.parse(roteiroId);
-          var imoveis = box.values.where((e) => e.roteiroId == id).toList();
+          var imoveis = box.values
+          .where((e) => e.roteiroId == id)
+          .toList()..sort(
+            (a, b) => a.id.compareTo(b.id)
+          );
 
           if (imoveis.isEmpty) {
             return Center(

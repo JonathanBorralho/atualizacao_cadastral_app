@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+import 'package:atualizacao_cadastral_app/app/shared/util/data_util.dart';
+
 part 'imovel.g.dart';
 
 @HiveType(typeId: 10, adapterName: 'ImovelAdapter')
@@ -57,6 +59,7 @@ class Imovel extends HiveObject {
 
   factory Imovel.fromJson(Map<String, dynamic> json) => Imovel(
     id: json['id'] == null ? null : json['id'],
+    roteiroId: json['roteiro_id'] == null ? null : json['roteiro_id'],
     roteirizacao: json['roteirizacao'] == null ? null : Roteirizacao.fromJson(json['roteirizacao']),
     endereco: json['endereco'] == null ? null : Endereco.fromJson(json['endereco']),
     cliente: json['cliente'] == null ? null : Cliente.fromJson(json['cliente']),
@@ -219,6 +222,30 @@ class Roteirizacao {
     'sublote': sublote == null ? null : sublote,
     'testada': testada == null ? null : testada,
   };
+
+  Roteirizacao copyWith({
+    int matricula,
+    int visita,
+    int localidade,
+    int setor,
+    int quadra,
+    int rota,
+    int sequencia,
+    int sublote,
+    int testada,
+  }) {
+    return Roteirizacao(
+      matricula: matricula ?? this.matricula,
+      visita: visita ?? this.visita,
+      localidade: localidade ?? this.localidade,
+      setor: setor ?? this.setor,
+      quadra: quadra ?? this.quadra,
+      rota: rota ?? this.rota,
+      sequencia: sequencia ?? this.sequencia,
+      sublote: sublote ?? this.sublote,
+      testada: testada ?? this.testada,
+    );
+  }
 }
 
 @HiveType(typeId: 13, adapterName: 'ClienteAdapter')
@@ -295,10 +322,10 @@ class Cliente {
     email: json['email'] == null ? null : json['email'],
     sexo: json['sexo'] == null ? null : json['sexo'],
     orgExp: json['org_exp'] == null ? null : json['org_exp'],
-    dataEmissao: json['data_emissao'] == null ? null : DateTime.parse(json['data_emissao']),
+    dataEmissao: json['data_emissao'] == null ? null : DateUtil.parse(json['data_emissao']),
     tipoCliente: json['tipo_cliente'] == null ? null : json['tipo_cliente'],
     tipoPessoa: json['tipo_pessoa'] == null ? null : json['tipo_pessoa'],
-    dataNascimento: json['data_nascimento'] == null ? null : DateTime.parse(json['data_nascimento']),
+    dataNascimento: json['data_nascimento'] == null ? null : DateUtil.parse(json['data_nascimento']),
     nomeMae: json['nome_mae'] == null ? null : json['nome_mae'],
     telDdd: json['tel_ddd'] == null ? null : json['tel_ddd'],
     telNum: json['tel_num'] == null ? null : json['tel_num'],
@@ -463,7 +490,7 @@ class Hidrometro {
   factory Hidrometro.fromJson(Map<String, dynamic> json) => Hidrometro(
     hidrometro: json['hidrometro'] == null ? null : json['hidrometro'],
     leitura: json['leitura'] == null ? null : json['leitura'],
-    dataLeitura: json['data_leitura'] == null ? null : DateTime.parse(json['data_leitura']),
+    dataLeitura: json['data_leitura'] == null ? null : DateUtil.parse(json['data_leitura']),
   );
 
   Map<String, dynamic> toJson() => {
