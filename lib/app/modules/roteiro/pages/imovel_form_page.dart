@@ -1,3 +1,4 @@
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/widgets/imovel_form/dropdown_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart' hide Consumer;
 import 'package:provider/provider.dart';
@@ -39,6 +40,7 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
     _form = _fb.group({
       'id': null,
       'roteiro_id': null,
+      'impedimento': null,
       'roteirizacao': _fb.group({
         'matricula': FormControl<int>(),
         'visita': FormControl<int>(),
@@ -160,80 +162,109 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
 class ImovelFormGroup extends StatelessWidget {
   const ImovelFormGroup();
 
+  final List<String> impedimentos = const [
+    'BAIXA DE MATRICULA',
+    'IMOVEL FECHADO',
+    'CLIENTE NAO PERMITIU ACESSO',
+    'FORA DE ROTA',
+    'APENAS CRIANCA',
+    'NAO ENCONTRADO'
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<StepperController>(
-      builder: (context, state, child) => Stepper(
-        steps: [
-          Step(
-            title: const Text('Roteirização'),
-            state: StepState.indexed,
-            content: const RoteirizacaoStepForm(),
-            isActive: state.currentStep == 0,
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: DropdownInputField(
+            labelText: 'Impedimento',
+            formControlName: 'impedimento',
+            items: impedimentos.map(toDropdownMenuItem).toList(),
           ),
-          Step(
-            title: const Text('Endereço'),
-            state: StepState.indexed,
-            content: const EnderecoStepForm(),
-            isActive: state.currentStep == 1,
+        ),
+        Consumer<StepperController>(
+          builder: (context, state, child) => Stepper(
+            physics: ClampingScrollPhysics(),
+            steps: [
+              Step(
+                title: const Text('Roteirização'),
+                state: StepState.indexed,
+                content: const RoteirizacaoStepForm(),
+                isActive: state.currentStep == 0,
+              ),
+              Step(
+                title: const Text('Endereço'),
+                state: StepState.indexed,
+                content: const EnderecoStepForm(),
+                isActive: state.currentStep == 1,
+              ),
+              Step(
+                title: const Text('Cliente'),
+                state: StepState.indexed,
+                content: const ClienteStepForm(),
+                isActive: state.currentStep == 2,
+              ),
+              Step(
+                title: const Text('Subcategoria/Econimias'),
+                state: StepState.indexed,
+                content: const SubcategoriaEconomiasStepForm(),
+                isActive: state.currentStep == 3,
+              ),
+              Step(
+                title: const Text('Características'),
+                state: StepState.indexed,
+                content: const CaracteristicasStepForm(),
+                isActive: state.currentStep == 4,
+              ),
+              Step(
+                title: const Text('Conclusão'),
+                state: StepState.indexed,
+                content: const ConclusaoStepForm(),
+                isActive: state.currentStep == 5,
+              ),
+              Step(
+                title: const Text('Hidrômetro'),
+                state: StepState.indexed,
+                content: const HidrometroStepForm(),
+                isActive: state.currentStep == 6,
+              ),
+              Step(
+                title: const Text('Coordenadas'),
+                state: StepState.indexed,
+                content: const CoordenadasStepForm(),
+                isActive: state.currentStep == 7,
+              ),
+              Step(
+                title: const Text('Observação'),
+                state: StepState.indexed,
+                content: ReactiveTextField(
+                  formControlName: 'observacao',
+                  textInputAction: TextInputAction.done,
+                ),
+                isActive: state.currentStep == 8,
+              ),
+            ],
+            currentStep: state.currentStep,
+            onStepContinue: state.onStepContinue,
+            onStepCancel: state.onStepCancel,
+            onStepTapped: state.onStepTapped,
+            controlsBuilder: (context, {onStepCancel, onStepContinue}) {
+              return StepperControls(
+                onStepCancel: onStepCancel,
+                onStepContinue: onStepContinue,
+              );
+            },
           ),
-          Step(
-            title: const Text('Cliente'),
-            state: StepState.indexed,
-            content: const ClienteStepForm(),
-            isActive: state.currentStep == 2,
-          ),
-          Step(
-            title: const Text('Subcategoria/Econimias'),
-            state: StepState.indexed,
-            content: const SubcategoriaEconomiasStepForm(),
-            isActive: state.currentStep == 3,
-          ),
-          Step(
-            title: const Text('Características'),
-            state: StepState.indexed,
-            content: const CaracteristicasStepForm(),
-            isActive: state.currentStep == 4,
-          ),
-          Step(
-            title: const Text('Conclusão'),
-            state: StepState.indexed,
-            content: const ConclusaoStepForm(),
-            isActive: state.currentStep == 5,
-          ),
-          Step(
-            title: const Text('Hidrômetro'),
-            state: StepState.indexed,
-            content: const HidrometroStepForm(),
-            isActive: state.currentStep == 6,
-          ),
-          Step(
-            title: const Text('Coordenadas'),
-            state: StepState.indexed,
-            content: const CoordenadasStepForm(),
-            isActive: state.currentStep == 7,
-          ),
-          Step(
-            title: const Text('Observação'),
-            state: StepState.indexed,
-            content: ReactiveTextField(
-              formControlName: 'observacao',
-              textInputAction: TextInputAction.done,
-            ),
-            isActive: state.currentStep == 8,
-          ),
-        ],
-        currentStep: state.currentStep,
-        onStepContinue: state.onStepContinue,
-        onStepCancel: state.onStepCancel,
-        onStepTapped: state.onStepTapped,
-        controlsBuilder: (context, {onStepCancel, onStepContinue}) {
-          return StepperControls(
-            onStepCancel: onStepCancel,
-            onStepContinue: onStepContinue,
-          );
-        },
-      ),
+        ),
+      ],
+    );
+  }
+
+  DropdownMenuItem<String> toDropdownMenuItem(String value) {
+    return DropdownMenuItem<String>(
+      child: Text(value),
+      value: value,
     );
   }
 }

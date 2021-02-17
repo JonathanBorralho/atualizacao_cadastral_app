@@ -28,13 +28,14 @@ class ImovelAdapter extends TypeAdapter<Imovel> {
       hidrometro: fields[8] as Hidrometro,
       coordenadas: fields[9] as Coordenadas,
       observacao: fields[10] as String,
+      impedimento: fields[11] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Imovel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class ImovelAdapter extends TypeAdapter<Imovel> {
       ..writeByte(9)
       ..write(obj.coordenadas)
       ..writeByte(10)
-      ..write(obj.observacao);
+      ..write(obj.observacao)
+      ..writeByte(11)
+      ..write(obj.impedimento);
   }
 
   @override

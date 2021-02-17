@@ -16,6 +16,7 @@ class Imovel extends HiveObject {
     this.hidrometro,
     this.coordenadas,
     this.observacao,
+    this.impedimento,
   });
 
   @HiveField(0)
@@ -51,6 +52,9 @@ class Imovel extends HiveObject {
   @HiveField(10)
   final String observacao;
 
+  @HiveField(11)
+  final String impedimento;
+
   factory Imovel.fromJson(Map<String, dynamic> json) => Imovel(
     id: json['id'] == null ? null : json['id'],
     roteirizacao: json['roteirizacao'] == null ? null : Roteirizacao.fromJson(json['roteirizacao']),
@@ -62,6 +66,7 @@ class Imovel extends HiveObject {
     hidrometro: json['hidrometro'] == null ? null : Hidrometro.fromJson(json['hidrometro']),
     coordenadas: json['coordenadas'] == null ? null : Coordenadas.fromJson(json['coordenadas']),
     observacao: json['observacao'] == null ? null : json['observacao'],
+    impedimento: json['impedimento'] == null ? null : json['impedimento'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -76,6 +81,7 @@ class Imovel extends HiveObject {
     'hidrometro': hidrometro == null ? null : hidrometro.toJson(),
     'coordenadas': coordenadas == null ? null : coordenadas.toJson(),
     'observacao': observacao == null ? null : observacao,
+    'impedimento': impedimento == null ? null : impedimento,
   };
 
   Imovel copyWith({
