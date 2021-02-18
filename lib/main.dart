@@ -39,6 +39,7 @@ Future<void> initHive() async {
   Hive.registerAdapter(DropdownsConfigAdapter());
 
   await Hive.openBox<RoteiroResumo>('roteiros');
+  await Hive.openBox<Imovel>('imoveis');
   await Hive.openBox<DropdownsConfig>('dropdown_config');
   await Hive.openBox<OAuthToken>('OAUTH_TOKEN_BOX');
 }

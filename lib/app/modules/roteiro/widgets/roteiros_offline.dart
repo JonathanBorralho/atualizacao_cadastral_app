@@ -22,7 +22,16 @@ class RoteirosOffline extends StatelessWidget {
           itemBuilder: (context, index) {
             var roteiro = box.getAt(index);
             return ListTile(
-              title: Text(roteiro.usuario.nome),
+              title: Text('Rota 11 - Localidade 111'),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('${roteiro.usuario.nome}'),
+                  Text('${roteiro.criadoEm.day}/${roteiro.criadoEm.month}/${roteiro.criadoEm.year}'),
+                ],
+              ),
+              isThreeLine: true,
+              trailing: Icon(Icons.mobile_screen_share),
               onTap: () {
                 Modular.to.pushNamed('/roteiros/${roteiro.id}/imoveis');
               },
