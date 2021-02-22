@@ -171,14 +171,13 @@ class ImovelSaveButton extends StatelessWidget {
     return FloatingActionButton(
       child: const Icon(Icons.save),
       onPressed: () async {
-        print(_form.value);
-        /* var imoveis = Hive.box<Imovel>('imoveis');
+        var imoveis = Hive.box<Imovel>('imoveis');
         Imovel imovel = Imovel.fromJson(_form.value);
         imoveis.put(widget.imovel.key, imovel);
 
         Scaffold.of(context).showSnackBar(
           SnackBar(content: const Text('Imóvel salvo com sucesso')),
-        ); */
+        );
       },
     );
   }
