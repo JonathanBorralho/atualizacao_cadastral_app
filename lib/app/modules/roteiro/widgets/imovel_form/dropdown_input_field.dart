@@ -31,6 +31,12 @@ class DropdownInputField<T> extends StatelessWidget {
           decoration: InputDecoration(
             labelText: labelText,
             labelStyle: _labelStyle(formControl, oldValue),
+            suffix: hasValue(formControl) ? IconButton(
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                formControl.reset(emitEvent: true);
+              },
+            ) : null,
           ),
           selectedItemBuilder: selectedItemBuilder,
         );
@@ -43,5 +49,9 @@ class DropdownInputField<T> extends StatelessWidget {
     return original != formControl.value
         ? const TextStyle(color: Colors.orange)
         : null;
+  }
+
+  bool hasValue(FormControl formControl) {
+    return formControl.value != null && (formControl.value as String).isNotEmpty;
   }
 }

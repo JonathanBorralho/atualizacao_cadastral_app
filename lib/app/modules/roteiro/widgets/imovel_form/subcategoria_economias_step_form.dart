@@ -18,7 +18,7 @@ class SubcategoriaEconomiasStepForm extends StatelessWidget {
   static final List<String> subcategorias1 = [
     '01 - RESIDENCIAL',
     '07 - RES. POPULAR',
-    '09 - ENT. FILANTROPIA',
+    '09 - ENT. FILANTROPICA',
   ];
   @override
   Widget build(BuildContext context) {
