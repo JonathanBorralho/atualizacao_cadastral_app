@@ -49,6 +49,7 @@ class ImovelListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: imovel.impedimento != null ? Colors.red : null,
       margin: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
