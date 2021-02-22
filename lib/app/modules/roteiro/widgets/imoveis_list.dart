@@ -68,10 +68,23 @@ class ImovelListItem extends StatelessWidget {
               Text('Bairro: ${imovel.endereco.bairro}'),
               Text('Nome: ${imovel.cliente.nome}'),
               Text('CPF: ${imovel.cliente.cpf}'),
+              if (imovel.modificadoEm != null) ... {
+                SizedBox(height: 5),
+                Text(
+                  'Modificado em: ${dateToString(imovel.modificadoEm)}',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              }
             ],
           ),
         ),
       ),
     );
+  }
+
+  String dateToString(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year.toString().padLeft(4, '0')} ${date.hour}:${date.minute}';
   }
 }

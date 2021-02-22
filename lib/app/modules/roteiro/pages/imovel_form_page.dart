@@ -43,6 +43,7 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
       'id': null,
       'roteiro_id': null,
       'impedimento': null,
+      'modificado_em': null,
       'roteirizacao': _fb.group({
         'matricula': FormControl<int>(),
         'visita': FormControl<int>(),
@@ -87,7 +88,7 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
       'caracteristicas': _fb.group({
         'area': FormControl<int>(),
         'calcada': null,
-        'rua': null,
+        'tipo_rua': null,
         'abastecimento': null,
         'agua': null,
         'esgoto': null,
@@ -173,7 +174,8 @@ class ImovelSaveButton extends StatelessWidget {
       onPressed: () async {
         var imoveis = Hive.box<Imovel>('imoveis');
         Imovel imovel = Imovel.fromJson(_form.value);
-        imoveis.put(widget.imovel.key, imovel);
+
+        imoveis.put(widget.imovel.key, imovel.copyWith(modificadoEm: DateTime.now()));
 
         Scaffold.of(context).showSnackBar(
           SnackBar(content: const Text('Imóvel salvo com sucesso')),

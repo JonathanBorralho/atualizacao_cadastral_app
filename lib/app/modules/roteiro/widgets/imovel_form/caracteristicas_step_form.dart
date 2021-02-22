@@ -32,7 +32,7 @@ class CaracteristicasStepForm extends StatelessWidget {
               ),
               DropdownInputField(
                 labelText: 'Rua',
-                formControlName: 'caracteristicas.rua',
+                formControlName: 'caracteristicas.tipo_rua',
                 items: config.tipoRua.map(tipoToDropdownMenuItem).toList(),
                 oldValue: caracteristicas?.rua,
               ),

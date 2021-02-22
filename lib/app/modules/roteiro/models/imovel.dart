@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 import 'package:atualizacao_cadastral_app/app/shared/util/data_util.dart';
@@ -5,7 +6,7 @@ import 'package:atualizacao_cadastral_app/app/shared/util/data_util.dart';
 part 'imovel.g.dart';
 
 @HiveType(typeId: 10, adapterName: 'ImovelAdapter')
-class Imovel extends HiveObject {
+class Imovel extends HiveObject with EquatableMixin {
   Imovel({
     this.id,
     this.roteiroId,
@@ -19,6 +20,7 @@ class Imovel extends HiveObject {
     this.coordenadas,
     this.observacao,
     this.impedimento,
+    this.modificadoEm,
   });
 
   @HiveField(0)
@@ -57,6 +59,9 @@ class Imovel extends HiveObject {
   @HiveField(11)
   final String impedimento;
 
+  @HiveField(12)
+  final DateTime modificadoEm;
+
   factory Imovel.fromJson(Map<String, dynamic> json) => Imovel(
     id: json['id'] == null ? null : json['id'],
     roteiroId: json['roteiro_id'] == null ? null : json['roteiro_id'],
@@ -70,6 +75,7 @@ class Imovel extends HiveObject {
     coordenadas: json['coordenadas'] == null ? null : Coordenadas.fromJson(json['coordenadas']),
     observacao: json['observacao'] == null ? null : json['observacao'],
     impedimento: json['impedimento'] == null ? null : json['impedimento'],
+    modificadoEm: json['modificado_em'] == null ? null : DateUtil.parse(json['modificado_em']),
   );
 
   Map<String, dynamic> toJson() => {
@@ -85,6 +91,7 @@ class Imovel extends HiveObject {
     'coordenadas': coordenadas == null ? null : coordenadas.toJson(),
     'observacao': observacao == null ? null : observacao,
     'impedimento': impedimento == null ? null : impedimento,
+    'modificado_em': modificadoEm == null ? null : '${modificadoEm.year.toString().padLeft(4, '0')}-${modificadoEm.month.toString().padLeft(2, '0')}-${modificadoEm.day.toString().padLeft(2, '0')}',
   };
 
   Imovel copyWith({
@@ -99,6 +106,8 @@ class Imovel extends HiveObject {
     Hidrometro hidrometro,
     Coordenadas coordenadas,
     String observacao,
+    String impedimento,
+    DateTime modificadoEm,
   }) {
     return Imovel(
       id: id ?? this.id,
@@ -112,12 +121,31 @@ class Imovel extends HiveObject {
       hidrometro: hidrometro ?? this.hidrometro,
       coordenadas: coordenadas ?? this.coordenadas,
       observacao: observacao ?? this.observacao,
+      impedimento: impedimento ?? this.impedimento,
+      modificadoEm: modificadoEm ?? this.modificadoEm,
     );
   }
+
+  @override
+  List<Object> get props => [
+    this.id,
+    this.roteiroId,
+    this.roteirizacao,
+    this.endereco,
+    this.cliente,
+    this.subcategorias,
+    this.caracteristicas,
+    this.conclusao,
+    this.hidrometro,
+    this.coordenadas,
+    this.observacao,
+    this.impedimento,
+    this.modificadoEm,
+  ];
 }
 
 @HiveType(typeId: 11, adapterName: 'EnderecoAdapter')
-class Endereco {
+class Endereco with EquatableMixin {
   Endereco({
     this.logradouro,
     this.cep,
@@ -156,10 +184,19 @@ class Endereco {
     'numero': numero == null ? null : numero,
     'complemento': complemento == null ? null : complemento,
   };
+
+  @override
+  List<Object> get props => [
+    this.logradouro,
+    this.cep,
+    this.bairro,
+    this.numero,
+    this.complemento,
+  ];
 }
 
 @HiveType(typeId: 12, adapterName: 'RoteirizacaoAdapter')
-class Roteirizacao {
+class Roteirizacao with EquatableMixin {
   Roteirizacao({
     this.matricula,
     this.visita,
@@ -246,10 +283,23 @@ class Roteirizacao {
       testada: testada ?? this.testada,
     );
   }
+
+  @override
+  List<Object> get props => [
+    this.matricula,
+    this.visita,
+    this.localidade,
+    this.setor,
+    this.quadra,
+    this.rota,
+    this.sequencia,
+    this.sublote,
+    this.testada,
+  ];
 }
 
 @HiveType(typeId: 13, adapterName: 'ClienteAdapter')
-class Cliente {
+class Cliente with EquatableMixin {
   Cliente({
     this.codigo,
     this.nome,
@@ -348,10 +398,29 @@ class Cliente {
     'tel_ddd': telDdd == null ? null : telDdd,
     'tel_num': telNum == null ? null : telNum,
   };
+
+  @override
+  List<Object> get props => [
+    this.codigo,
+    this.nome,
+    this.cpf,
+    this.rg,
+    this.uf,
+    this.email,
+    this.sexo,
+    this.orgExp,
+    this.dataEmissao,
+    this.tipoCliente,
+    this.tipoPessoa,
+    this.dataNascimento,
+    this.nomeMae,
+    this.telDdd,
+    this.telNum,
+  ];
 }
 
 @HiveType(typeId: 14, adapterName: 'CaracteristicasAdapter')
-class Caracteristicas {
+class Caracteristicas with EquatableMixin {
   Caracteristicas({
     this.area,
     this.calcada,
@@ -398,7 +467,7 @@ class Caracteristicas {
   factory Caracteristicas.fromJson(Map<String, dynamic> json) => Caracteristicas(
     area: json['area'] == null ? null : json['area'],
     calcada: json['calcada'] == null ? null : json['calcada'],
-    rua: json['rua'] == null ? null : json['rua'],
+    rua: json['tipo_rua'] == null ? null : json['tipo_rua'],
     abastecimento: json['abastecimento'] == null ? null : json['abastecimento'],
     agua: json['agua'] == null ? null : json['agua'],
     esgoto: json['esgoto'] == null ? null : json['esgoto'],
@@ -411,7 +480,7 @@ class Caracteristicas {
   Map<String, dynamic> toJson() => {
     'area': area == null ? null : area,
     'calcada': calcada == null ? null : calcada,
-    'rua': rua == null ? null : rua,
+    'tipo_rua': rua == null ? null : rua,
     'abastecimento': abastecimento == null ? null : abastecimento,
     'agua': agua == null ? null : agua,
     'esgoto': esgoto == null ? null : esgoto,
@@ -420,10 +489,24 @@ class Caracteristicas {
     'construcao': construcao == null ? null : construcao,
     'cobertura': cobertura == null ? null : cobertura,
   };
+
+  @override
+  List<Object> get props => [
+    this.area,
+    this.calcada,
+    this.rua,
+    this.abastecimento,
+    this.agua,
+    this.esgoto,
+    this.habitacao,
+    this.propriedade,
+    this.construcao,
+    this.cobertura,
+  ];
 }
 
 @HiveType(typeId: 15, adapterName: 'ConclusaoAdapter')
-class Conclusao {
+class Conclusao with EquatableMixin {
   Conclusao({
     this.moradores,
     this.ptAgua,
@@ -444,10 +527,16 @@ class Conclusao {
     'moradores': moradores == null ? null : moradores,
     'pt_agua': ptAgua == null ? null : ptAgua,
   };
+
+  @override
+  List<Object> get props => [
+    this.moradores,
+    this.ptAgua,
+  ];
 }
 
 @HiveType(typeId: 16, adapterName: 'CoordenadasAdapter')
-class Coordenadas {
+class Coordenadas with EquatableMixin {
   Coordenadas({
     this.longitude,
     this.latitude,
@@ -468,10 +557,16 @@ class Coordenadas {
     'longitude': longitude == null ? null : longitude,
     'latitude': latitude == null ? null : latitude,
   };
+
+  @override
+  List<Object> get props => [
+    this.longitude,
+    this.latitude,
+  ];
 }
 
 @HiveType(typeId: 17, adapterName: 'HidrometroAdapter')
-class Hidrometro {
+class Hidrometro with EquatableMixin {
   Hidrometro({
     this.hidrometro,
     this.leitura,
@@ -504,10 +599,18 @@ class Hidrometro {
     'data_leitura': dataLeitura == null ? null : '${dataLeitura.year.toString().padLeft(4, '0')}-${dataLeitura.month.toString().padLeft(2, '0')}-${dataLeitura.day.toString().padLeft(2, '0')}',
     'trocar': trocarHidrometro == null ? null : trocarHidrometro,
   };
+
+  @override
+  List<Object> get props => [
+    this.hidrometro,
+    this.leitura,
+    this.dataLeitura,
+    this.trocarHidrometro,
+  ];
 }
 
 @HiveType(typeId: 18, adapterName: 'SubcategoriasAdapter')
-class Subcategorias {
+class Subcategorias with EquatableMixin {
   Subcategorias({
     this.economias,
     this.cat1,
@@ -540,4 +643,12 @@ class Subcategorias {
     'subcat_1': subcat1 == null ? null : subcat1,
     'cat_2': cat2 == null ? null : cat2,
   };
+
+  @override
+  List<Object> get props => [
+    this.economias,
+    this.cat1,
+    this.subcat1,
+    this.cat2,
+  ];
 }
