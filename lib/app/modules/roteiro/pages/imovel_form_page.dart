@@ -47,13 +47,13 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
       'roteirizacao': _fb.group({
         'matricula': FormControl<int>(),
         'visita': FormControl<int>(),
-        'localidade': null,
-        'setor': null,
-        'quadra': null,
-        'rota': null,
-        'sequencia': null,
-        'sublote': null,
-        'testada': null,
+        'localidade': FormControl<int>(),
+        'setor': FormControl<int>(),
+        'quadra': FormControl<int>(),
+        'rota': FormControl<int>(),
+        'sequencia': FormControl<int>(),
+        'sublote': FormControl<int>(),
+        'testada': FormControl<int>(),
       }),
       'endereco': _fb.group({
         'logradouro': null,
@@ -82,7 +82,7 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
       'subcategorias': _fb.group({
         'cat_1': null,
         'subcat_1': null,
-        'economias': null,
+        'economias': FormControl<int>(),
         'cat_2': null,
       }),
       'caracteristicas': _fb.group({
