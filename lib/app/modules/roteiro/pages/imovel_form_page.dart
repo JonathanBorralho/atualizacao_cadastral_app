@@ -313,9 +313,6 @@ class StepperControls extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8),
           child: Row(
             children: [
-              if (state.currentStep == 7) ...{
-                const GerarCoordenadasButton(),
-              },
               if (!state.isLast) ...{
                 TextButton(
                   onPressed: onStepContinue,
@@ -327,6 +324,9 @@ class StepperControls extends StatelessWidget {
                   onPressed: onStepCancel,
                   child: const Text('ANTERIOR'),
                 ),
+              },
+              if (state.currentStep == 7) ...{
+                const GerarCoordenadasButton(),
               },
             ],
           ),
