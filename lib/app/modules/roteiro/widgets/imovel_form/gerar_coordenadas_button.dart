@@ -15,11 +15,33 @@ class GerarCoordenadasButton extends StatelessWidget {
       ),
       child: const Text('GERAR'),
       onPressed: () async {
-        Position position = await Geolocator.getCurrentPosition();
-        FormGroup formGroup = ReactiveForm.of(context);
-        formGroup.control('coordenadas.latitude').updateValue(position.latitude, emitEvent: true);
-        formGroup.control('coordenadas.longitude').updateValue(position.longitude, emitEvent: true);
+        try {
+          Position position = await Geolocator.getCurrentPosition();
+          FormGroup formGroup = ReactiveForm.of(context);
+          formGroup
+              .control('coordenadas.latitude')
+              .updateValue(position.latitude, emitEvent: true);
+          formGroup
+              .control('coordenadas.longitude')
+              .updateValue(position.longitude, emitEvent: true);
+        } on PermissionDeniedException {
+          showPermissionDeniedExceptionError(context);
+        }
       },
+    );
+  }
+
+  void showPermissionDeniedExceptionError(BuildContext context) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Você deve permitir o acesso às coordenadas'),
+        action: SnackBarAction(
+          label: 'Permitir',
+          onPressed: () async {
+            await Geolocator.openAppSettings();
+          },
+        ),
+      ),
     );
   }
 }
