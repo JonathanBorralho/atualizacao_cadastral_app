@@ -38,6 +38,7 @@ dependencies:
   geolocator: ^6.2.0
   dio_http_cache: ^0.2.11
   equatable:
+  adaptive_dialog: ^0.9.4
 
   login_module:
     path: packages/login_module

@@ -1,3 +1,4 @@
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/services/roteiro_upload_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'pages/imovel_form_page.dart';
@@ -11,6 +12,7 @@ class RoteiroModule extends ChildModule {
   List<Bind> get binds => [
     Bind((i) => RoteiroRepository(i())),
     Bind((i) => DropdownsConfigService(i())),
+    Bind((i) => RoteiroUploadService(i())),
   ];
 
   @override
