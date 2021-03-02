@@ -28,13 +28,14 @@ class DropdownsConfigAdapter extends TypeAdapter<DropdownsConfig> {
       tipoRua: (fields[8] as List)?.cast<Tipo>(),
       tipoPropriedade: (fields[9] as List)?.cast<Tipo>(),
       estados: (fields[10] as List)?.cast<Estado>(),
+      tipoImpedimento: (fields[11] as List)?.cast<Tipo>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, DropdownsConfig obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.tipoAbastecimento)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class DropdownsConfigAdapter extends TypeAdapter<DropdownsConfig> {
       ..writeByte(9)
       ..write(obj.tipoPropriedade)
       ..writeByte(10)
-      ..write(obj.estados);
+      ..write(obj.estados)
+      ..writeByte(11)
+      ..write(obj.tipoImpedimento);
   }
 
   @override

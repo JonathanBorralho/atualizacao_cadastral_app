@@ -31,7 +31,7 @@ class DropdownInputField<T> extends StatelessWidget {
           decoration: InputDecoration(
             labelText: labelText,
             labelStyle: _labelStyle(formControl, oldValue),
-            suffix: hasValue(formControl) ? IconButton(
+            suffix: _hasValue(formControl) ? IconButton(
               icon: const Icon(Icons.clear),
               onPressed: () {
                 formControl.reset(emitEvent: true);
@@ -51,7 +51,13 @@ class DropdownInputField<T> extends StatelessWidget {
         : null;
   }
 
-  bool hasValue(FormControl formControl) {
-    return formControl.value != null && (formControl.value as String).isNotEmpty;
+  bool _hasValue(FormControl formControl) {
+    final value = formControl.value;
+    if (value is String) return _isValidString(value);
+    return formControl.value != null;
+  }
+
+  bool _isValidString(String value) {
+    return value != null && value.isNotEmpty;
   }
 }

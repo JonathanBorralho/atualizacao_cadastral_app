@@ -42,7 +42,7 @@ class _ImovelFormPageState extends State<ImovelFormPage> {
       'key': widget.imovel.key,
       'id': null,
       'roteiro_id': null,
-      'impedimento': null,
+      'impedimento': FormControl<Tipo>(),
       'modificado_em': null,
       'roteirizacao': _fb.group({
         'matricula': FormControl<int>(),
@@ -188,17 +188,9 @@ class ImovelSaveButton extends StatelessWidget {
 class ImovelFormGroup extends StatelessWidget {
   const ImovelFormGroup();
 
-  final List<String> impedimentos = const [
-    'BAIXA DE MATRICULA',
-    'IMOVEL FECHADO',
-    'CLIENTE NAO PERMITIU ACESSO',
-    'FORA DE ROTA',
-    'APENAS CRIANCA',
-    'NAO ENCONTRADO'
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final DropdownsConfig config = context.read<DropdownsConfig>();
     return ListView(
       children: [
         Padding(
@@ -206,7 +198,7 @@ class ImovelFormGroup extends StatelessWidget {
           child: DropdownInputField(
             labelText: 'Impedimento',
             formControlName: 'impedimento',
-            items: impedimentos.map(toDropdownMenuItem).toList(),
+            items: config.tipoImpedimento.map(tipoToDropdownMenuItem).toList(),
           ),
         ),
         Consumer<StepperController>(
@@ -290,6 +282,15 @@ class ImovelFormGroup extends StatelessWidget {
   DropdownMenuItem<String> toDropdownMenuItem(String value) {
     return DropdownMenuItem<String>(
       child: Text(value),
+      value: value,
+    );
+  }
+
+  DropdownMenuItem<dynamic> tipoToDropdownMenuItem(Tipo value) {
+    final String id = '${value.id}';
+    final String text = '${id.padLeft(2, '0')} - ${value.descricao}';
+    return DropdownMenuItem<dynamic>(
+      child: Text(text),
       value: value,
     );
   }

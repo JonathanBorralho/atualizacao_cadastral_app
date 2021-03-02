@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 import 'package:atualizacao_cadastral_app/app/shared/util/data_util.dart';
+import 'package:atualizacao_cadastral_app/app/modules/roteiro/models/dropdowns_config.dart';
 
 part 'imovel.g.dart';
 
@@ -57,7 +58,7 @@ class Imovel extends HiveObject with EquatableMixin {
   final String observacao;
 
   @HiveField(11)
-  final String impedimento;
+  final Tipo impedimento;
 
   @HiveField(12)
   final DateTime modificadoEm;
@@ -74,7 +75,7 @@ class Imovel extends HiveObject with EquatableMixin {
     hidrometro: json['hidrometro'] == null ? null : Hidrometro.fromJson(json['hidrometro']),
     coordenadas: json['coordenadas'] == null ? null : Coordenadas.fromJson(json['coordenadas']),
     observacao: json['observacao'] == null ? null : json['observacao'],
-    impedimento: json['impedimento'] == null ? null : json['impedimento'],
+    impedimento: json['impedimento'] == null ? null : Tipo.fromJson(json['impedimento']),
     modificadoEm: json['modificado_em'] == null ? null : DateUtil.parse(json['modificado_em']),
   );
 

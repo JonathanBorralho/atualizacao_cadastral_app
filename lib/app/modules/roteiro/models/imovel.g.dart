@@ -28,7 +28,7 @@ class ImovelAdapter extends TypeAdapter<Imovel> {
       hidrometro: fields[8] as Hidrometro,
       coordenadas: fields[9] as Coordenadas,
       observacao: fields[10] as String,
-      impedimento: fields[11] as String,
+      impedimento: fields[11] as Tipo,
       modificadoEm: fields[12] as DateTime,
     );
   }

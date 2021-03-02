@@ -17,6 +17,7 @@ class DropdownsConfig extends Equatable {
     this.tipoRua,
     this.tipoPropriedade,
     this.estados,
+    this.tipoImpedimento,
   });
 
   @HiveField(0)
@@ -52,32 +53,37 @@ class DropdownsConfig extends Equatable {
   @HiveField(10)
   final List<Estado> estados;
 
+  @HiveField(11)
+  final List<Tipo> tipoImpedimento;
+
   factory DropdownsConfig.fromJson(Map<String, dynamic> json) => DropdownsConfig(
-    tipoAbastecimento: json['tipoAbastecimento'] == null ? null : List<Tipo>.from(json['tipoAbastecimento'].map((x) => Tipo.fromJson(x))),
-    tipoSitAgua: json['tipoSitAgua'] == null ? null : List<Tipo>.from(json['tipoSitAgua'].map((x) => Tipo.fromJson(x))),
-    tipoSitEsgoto: json['tipoSitEsgoto'] == null ? null : List<Tipo>.from(json['tipoSitEsgoto'].map((x) => Tipo.fromJson(x))),
-    tipoCliente: json['tipoCliente'] == null ? null : List<Tipo>.from(json['tipoCliente'].map((x) => Tipo.fromJson(x))),
-    tipoCobertura: json['tipoCobertura'] == null ? null : List<Tipo>.from(json['tipoCobertura'].map((x) => Tipo.fromJson(x))),
-    tipoConstrucao: json['tipoConstrucao'] == null ? null : List<Tipo>.from(json['tipoConstrucao'].map((x) => Tipo.fromJson(x))),
-    tipoHabitacao: json['tipoHabitacao'] == null ? null : List<Tipo>.from(json['tipoHabitacao'].map((x) => Tipo.fromJson(x))),
-    tipoCalcada: json['tipoCalcada'] == null ? null : List<Tipo>.from(json['tipoCalcada'].map((x) => Tipo.fromJson(x))),
-    tipoRua: json['tipoRua'] == null ? null : List<Tipo>.from(json['tipoRua'].map((x) => Tipo.fromJson(x))),
-    tipoPropriedade: json['tipoPropriedade'] == null ? null : List<Tipo>.from(json['tipoPropriedade'].map((x) => Tipo.fromJson(x))),
+    tipoAbastecimento: json['tipo_abastecimento'] == null ? null : List<Tipo>.from(json['tipo_abastecimento'].map((x) => Tipo.fromJson(x))),
+    tipoSitAgua: json['tipo_sit_agua'] == null ? null : List<Tipo>.from(json['tipo_sit_agua'].map((x) => Tipo.fromJson(x))),
+    tipoSitEsgoto: json['tipo_sit_esgoto'] == null ? null : List<Tipo>.from(json['tipo_sit_esgoto'].map((x) => Tipo.fromJson(x))),
+    tipoCliente: json['tipo_cliente'] == null ? null : List<Tipo>.from(json['tipo_cliente'].map((x) => Tipo.fromJson(x))),
+    tipoCobertura: json['tipo_cobertura'] == null ? null : List<Tipo>.from(json['tipo_cobertura'].map((x) => Tipo.fromJson(x))),
+    tipoConstrucao: json['tipo_construcao'] == null ? null : List<Tipo>.from(json['tipo_construcao'].map((x) => Tipo.fromJson(x))),
+    tipoHabitacao: json['tipo_habitacao'] == null ? null : List<Tipo>.from(json['tipo_habitacao'].map((x) => Tipo.fromJson(x))),
+    tipoCalcada: json['tipo_calcada'] == null ? null : List<Tipo>.from(json['tipo_calcada'].map((x) => Tipo.fromJson(x))),
+    tipoRua: json['tipo_rua'] == null ? null : List<Tipo>.from(json['tipo_rua'].map((x) => Tipo.fromJson(x))),
+    tipoPropriedade: json['tipo_propriedade'] == null ? null : List<Tipo>.from(json['tipo_propriedade'].map((x) => Tipo.fromJson(x))),
     estados: json['estados'] == null ? null : List<Estado>.from(json['estados'].map((x) => Estado.fromJson(x))),
+    tipoImpedimento: json['tipo_impedimento'] == null ? null : List<Tipo>.from(json['tipo_impedimento'].map((x) => Tipo.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    'tipoAbastecimento': tipoAbastecimento == null ? null : List<dynamic>.from(tipoAbastecimento.map((x) => x.toJson())),
-    'tipoSitAgua': tipoSitAgua == null ? null : List<dynamic>.from(tipoSitAgua.map((x) => x.toJson())),
-    'tipoSitEsgoto': tipoSitEsgoto == null ? null : List<dynamic>.from(tipoSitEsgoto.map((x) => x.toJson())),
-    'tipoCliente': tipoCliente == null ? null : List<dynamic>.from(tipoCliente.map((x) => x.toJson())),
-    'tipoCobertura': tipoCobertura == null ? null : List<dynamic>.from(tipoCobertura.map((x) => x.toJson())),
-    'tipoConstrucao': tipoConstrucao == null ? null : List<dynamic>.from(tipoConstrucao.map((x) => x.toJson())),
-    'tipoHabitacao': tipoHabitacao == null ? null : List<dynamic>.from(tipoHabitacao.map((x) => x.toJson())),
-    'tipoCalcada': tipoCalcada == null ? null : List<dynamic>.from(tipoCalcada.map((x) => x.toJson())),
-    'tipoRua': tipoRua == null ? null : List<dynamic>.from(tipoRua.map((x) => x.toJson())),
-    'tipoPropriedade': tipoPropriedade == null ? null : List<dynamic>.from(tipoPropriedade.map((x) => x.toJson())),
+    'tipo_abastecimento': tipoAbastecimento == null ? null : List<dynamic>.from(tipoAbastecimento.map((x) => x.toJson())),
+    'tipo_sit_agua': tipoSitAgua == null ? null : List<dynamic>.from(tipoSitAgua.map((x) => x.toJson())),
+    'tipo_sit_esgoto': tipoSitEsgoto == null ? null : List<dynamic>.from(tipoSitEsgoto.map((x) => x.toJson())),
+    'tipo_cliente': tipoCliente == null ? null : List<dynamic>.from(tipoCliente.map((x) => x.toJson())),
+    'tipo_cobertura': tipoCobertura == null ? null : List<dynamic>.from(tipoCobertura.map((x) => x.toJson())),
+    'tipo_construcao': tipoConstrucao == null ? null : List<dynamic>.from(tipoConstrucao.map((x) => x.toJson())),
+    'tipo_habitacao': tipoHabitacao == null ? null : List<dynamic>.from(tipoHabitacao.map((x) => x.toJson())),
+    'tipo_calcada': tipoCalcada == null ? null : List<dynamic>.from(tipoCalcada.map((x) => x.toJson())),
+    'tipo_rua': tipoRua == null ? null : List<dynamic>.from(tipoRua.map((x) => x.toJson())),
+    'tipo_propriedade': tipoPropriedade == null ? null : List<dynamic>.from(tipoPropriedade.map((x) => x.toJson())),
     'estados': estados == null ? null : List<dynamic>.from(estados.map((x) => x.toJson())),
+    'tipo_impedimento': tipoImpedimento == null ? null : List<dynamic>.from(tipoImpedimento.map((x) => x.toJson())),
   };
 
   @override
@@ -93,6 +99,7 @@ class DropdownsConfig extends Equatable {
     tipoRua,
     tipoPropriedade,
     estados,
+    tipoImpedimento,
   ];
 }
 
@@ -146,10 +153,13 @@ class Tipo extends Equatable {
   @HiveField(1)
   final String descricao;
 
-  factory Tipo.fromJson(Map<String, dynamic> json) => Tipo(
-    id: json['id'] == null ? null : json['id'],
-    descricao: json['descricao'] == null ? null : json['descricao'],
-  );
+  factory Tipo.fromJson(dynamic json) {
+    if (json is Tipo) return json;
+    return Tipo(
+      id: json['id'] == null ? null : json['id'],
+      descricao: json['descricao'] == null ? null : json['descricao'],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'id': id == null ? null : id,
@@ -157,8 +167,5 @@ class Tipo extends Equatable {
   };
 
   @override
-  List<Object> get props => [
-    id,
-    descricao,
-  ];
+  List<Object> get props => [id];
 }
