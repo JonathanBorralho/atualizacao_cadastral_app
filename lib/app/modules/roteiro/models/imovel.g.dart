@@ -268,15 +268,15 @@ class CaracteristicasAdapter extends TypeAdapter<Caracteristicas> {
     };
     return Caracteristicas(
       area: fields[0] as int,
-      calcada: fields[1] as String,
-      rua: fields[2] as String,
-      abastecimento: fields[3] as String,
-      agua: fields[4] as String,
-      esgoto: fields[5] as String,
-      habitacao: fields[6] as String,
-      propriedade: fields[7] as String,
-      construcao: fields[8] as String,
-      cobertura: fields[9] as String,
+      calcada: fields[1] as Tipo,
+      rua: fields[2] as Tipo,
+      abastecimento: fields[3] as Tipo,
+      agua: fields[4] as Tipo,
+      esgoto: fields[5] as Tipo,
+      habitacao: fields[6] as Tipo,
+      propriedade: fields[7] as Tipo,
+      construcao: fields[8] as Tipo,
+      cobertura: fields[9] as Tipo,
     );
   }
 

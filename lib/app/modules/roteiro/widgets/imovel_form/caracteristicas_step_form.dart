@@ -85,19 +85,19 @@ class CaracteristicasStepForm extends StatelessWidget {
     );
   }
 
-  DropdownMenuItem<String> toDropdownMenuItem(String value) {
+  /* DropdownMenuItem<String> toDropdownMenuItem(String value) {
     return DropdownMenuItem<String>(
       child: Text(value),
       value: value,
     );
-  }
+  } */
 
-  DropdownMenuItem<String> tipoToDropdownMenuItem(Tipo value) {
+  DropdownMenuItem<Tipo> tipoToDropdownMenuItem(Tipo value) {
     final String id = '${value.id}';
     final String text = '${id.padLeft(2, '0')} - ${value.descricao}';
-    return DropdownMenuItem<String>(
+    return DropdownMenuItem<Tipo>(
       child: Text(text),
-      value: text,
+      value: value,
     );
   }
 }

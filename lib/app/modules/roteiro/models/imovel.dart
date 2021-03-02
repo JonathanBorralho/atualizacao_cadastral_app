@@ -439,43 +439,43 @@ class Caracteristicas with EquatableMixin {
   final int area;
 
   @HiveField(1)
-  final String calcada;
+  final Tipo calcada;
 
   @HiveField(2)
-  final String rua;
+  final Tipo rua;
 
   @HiveField(3)
-  final String abastecimento;
+  final Tipo abastecimento;
 
   @HiveField(4)
-  final String agua;
+  final Tipo agua;
 
   @HiveField(5)
-  final String esgoto;
+  final Tipo esgoto;
 
   @HiveField(6)
-  final String habitacao;
+  final Tipo habitacao;
 
   @HiveField(7)
-  final String propriedade;
+  final Tipo propriedade;
 
   @HiveField(8)
-  final String construcao;
+  final Tipo construcao;
 
   @HiveField(9)
-  final String cobertura;
+  final Tipo cobertura;
 
   factory Caracteristicas.fromJson(Map<String, dynamic> json) => Caracteristicas(
     area: json['area'] == null ? null : json['area'],
-    calcada: json['calcada'] == null ? null : json['calcada'],
-    rua: json['tipo_rua'] == null ? null : json['tipo_rua'],
-    abastecimento: json['abastecimento'] == null ? null : json['abastecimento'],
-    agua: json['agua'] == null ? null : json['agua'],
-    esgoto: json['esgoto'] == null ? null : json['esgoto'],
-    habitacao: json['habitacao'] == null ? null : json['habitacao'],
-    propriedade: json['propriedade'] == null ? null : json['propriedade'],
-    construcao: json['construcao'] == null ? null : json['construcao'],
-    cobertura: json['cobertura'] == null ? null : json['cobertura'],
+    calcada: json['calcada'] == null ? null : Tipo.fromJson(json['calcada']),
+    rua: json['tipo_rua'] == null ? null : Tipo.fromJson(json['tipo_rua']),
+    abastecimento: json['abastecimento'] == null ? null : Tipo.fromJson(json['abastecimento']),
+    agua: json['agua'] == null ? null : Tipo.fromJson(json['agua']),
+    esgoto: json['esgoto'] == null ? null : Tipo.fromJson(json['esgoto']),
+    habitacao: json['habitacao'] == null ? null : Tipo.fromJson(json['habitacao']),
+    propriedade: json['propriedade'] == null ? null : Tipo.fromJson(json['propriedade']),
+    construcao: json['construcao'] == null ? null : Tipo.fromJson(json['construcao']),
+    cobertura: json['cobertura'] == null ? null : Tipo.fromJson(json['cobertura']),
   );
 
   Map<String, dynamic> toJson() => {
