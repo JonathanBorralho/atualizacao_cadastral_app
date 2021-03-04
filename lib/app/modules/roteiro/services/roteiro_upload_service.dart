@@ -11,6 +11,7 @@ class RoteiroUploadService {
     final imoveis = Hive.box<Imovel>('imoveis').values;
     final roteiroImoveis = imoveis
         .where((e) => e.roteiroId == roteiroId)
+        .where((e) => e.modificadoEm != null)
         .map((e) => e.toJson())
         .toList();
 
@@ -25,8 +26,5 @@ class RoteiroUploadService {
       data: data,
       options: Options(headers: { 'content-type': 'application/json' }),
     );
-    if (response.statusCode == 200) {
-      print('ok');
-    }
   }
 }
